@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Compliance RGPD — Évidences</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <div>
+        <h1>Compliance RGPD</h1>
+        <p>Centralisation des évidences de conformité</p>
+    </div>
+    <nav>
+        <a href="{{ url_for('dashboard') }}">Tableau de bord</a>
+        <a href="{{ url_for('evidences') }}">Évidences</a>
+        <a href="{{ url_for('new_evidence') }}">Ajouter</a>
+        <a href="{{ url_for('export_csv') }}">Export CSV</a>
+    </nav>
+</header>
+
+<main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>

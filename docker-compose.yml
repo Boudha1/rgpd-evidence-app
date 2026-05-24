@@ -1,0 +1,10 @@
+services:
+  rgpd-app:
+    build: .
+    container_name: rgpd_app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./rgpd_evidences.db:/app/rgpd_evidences.db
+    restart: unless-stopped

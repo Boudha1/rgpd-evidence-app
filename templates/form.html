@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+    <h2>Ajouter une évidence RGPD</h2>
+    <p>Enregistrer une preuve de conformité et joindre un document justificatif.</p>
+</section>
+
+<form class="form-card" method="post" enctype="multipart/form-data">
+    <label>Titre de l'évidence *</label>
+    <input type="text" name="title" required placeholder="Ex. Registre des traitements 2026">
+
+    <label>Catégorie *</label>
+    <select name="category" required>
+        {% for c in categories %}
+        <option value="{{ c }}">{{ c }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Description</label>
+    <textarea name="description" rows="4" placeholder="Décrire la preuve, le contexte et son objectif..."></textarea>
+
+    <label>Responsable</label>
+    <input type="text" name="owner" placeholder="Ex. DPO, RSSI, Juridique">
+
+    <label>Statut *</label>
+    <select name="status" required>
+        {% for s in statuses %}
+        <option value="{{ s }}">{{ s }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Date du document</label>
+    <input type="date" name="document_date">
+
+    <label>Date de prochaine revue</label>
+    <input type="date" name="review_date">
+
+    <label>Base légale / référence RGPD</label>
+    <input type="text" name="legal_basis" placeholder="Ex. Article 30 RGPD, Article 32 RGPD">
+
+    <label>Document justificatif</label>
+    <input type="file" name="file">
+
+    <button type="submit">Enregistrer l'évidence</button>
+</form>
+{% endblock %}

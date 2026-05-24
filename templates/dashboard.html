@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+    <h2>Tableau de bord RGPD</h2>
+    <p>Suivi global des preuves de conformité collectées par l'entreprise.</p>
+</section>
+
+<section class="cards">
+    <div class="card">
+        <h3>Total évidences</h3>
+        <strong>{{ total }}</strong>
+    </div>
+</section>
+
+<section class="grid">
+    <div class="panel">
+        <h3>Répartition par statut</h3>
+        <table>
+            {% for row in by_status %}
+            <tr><td>{{ row.status }}</td><td>{{ row.c }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="panel">
+        <h3>Répartition par catégorie</h3>
+        <table>
+            {% for row in by_category %}
+            <tr><td>{{ row.category }}</td><td>{{ row.c }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+
+<section class="panel">
+    <h3>Dernières évidences ajoutées</h3>
+    <table>
+        <thead>
+            <tr><th>Titre</th><th>Catégorie</th><th>Statut</th><th>Responsable</th></tr>
+        </thead>
+        <tbody>
+        {% for e in latest %}
+            <tr>
+                <td>{{ e.title }}</td>
+                <td>{{ e.category }}</td>
+                <td><span class="badge">{{ e.status }}</span></td>
+                <td>{{ e.owner }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

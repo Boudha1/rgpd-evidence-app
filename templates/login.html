@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+    <h2>Connexion administrateur</h2>
+    <p>Accès sécurisé à la plateforme de conformité RGPD.</p>
+</section>
+
+<form class="form-card" method="post">
+    <label>Identifiant</label>
+    <input type="text" name="username" required>
+
+    <label>Mot de passe</label>
+    <input type="password" name="password" required>
+
+    <button type="submit">Se connecter</button>
+</form>
+{% endblock %}

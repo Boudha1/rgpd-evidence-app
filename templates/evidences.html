@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+    <h2>Registre des évidences RGPD</h2>
+    <p>Rechercher, filtrer et consulter les preuves de conformité.</p>
+</section>
+
+<form class="filters" method="get">
+    <input type="text" name="q" placeholder="Recherche..." value="{{ q }}">
+    <select name="category">
+        <option value="">Toutes les catégories</option>
+        {% for c in categories %}
+        <option value="{{ c }}" {% if selected_category == c %}selected{% endif %}>{{ c }}</option>
+        {% endfor %}
+    </select>
+    <select name="status">
+        <option value="">Tous les statuts</option>
+        {% for s in statuses %}
+        <option value="{{ s }}" {% if selected_status == s %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filtrer</button>
+</form>
+
+<section class="panel">
+<table>
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Catégorie</th>
+            <th>Statut</th>
+            <th>Responsable</th>
+            <th>Date document</th>
+            <th>Revue</th>
+            <th>Fichier</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for e in evidences %}
+        <tr>
+            <td>
+                <strong>{{ e.title }}</strong><br>
+                <small>{{ e.description }}</small>
+            </td>
+            <td>{{ e.category }}</td>
+            <td><span class="badge">{{ e.status }}</span></td>
+            <td>{{ e.owner }}</td>
+            <td>{{ e.document_date }}</td>
+            <td>{{ e.review_date }}</td>
+            <td>
+                {% if e.file_name %}
+                    <a href="{{ url_for('uploaded_file', filename=e.file_name) }}">Télécharger</a>
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+            <td>
+                <form method="post" action="{{ url_for('delete_evidence', evidence_id=e.id) }}" onsubmit="return confirm('Supprimer cette évidence ?')">
+                    <button class="danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</section>
+{% endblock %}
