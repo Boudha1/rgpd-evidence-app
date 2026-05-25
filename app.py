@@ -33,8 +33,7 @@ CATEGORIES = [
     "Politique de confidentialité",
     "Preuves d'audit"
 ]
-
-STATUSES = ["À collecter", "En cours", "Validée", "À mettre à jour", "Expirée"]
+STATUSES = ["À collecter", "En cours", "Validée", "À mettre à jour", "Expirée", "Critique"]
 
 class User(UserMixin):
     def __init__(self, username):
