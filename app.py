@@ -6,9 +6,11 @@ from flask_bcrypt import Bcrypt
 import os, sqlite3, csv
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(APP_DIR, "rgpd_evidences.db")
-UPLOAD_DIR = os.path.join(APP_DIR, "uploads")
+DATA_DIR = "/var/data"
+DB_PATH = os.path.join(DATA_DIR, "rgpd_evidences.db")
+UPLOAD_DIR = os.path.join(DATA_DIR, "uploads")
 
+os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 app = Flask(__name__)
