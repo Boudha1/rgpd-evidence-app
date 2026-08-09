@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+build/
+dist/
+app.py.bak
+rgpd_evidences.db
+export_evidences_rgpd.csv
+uploads/
+
+.env
+.env.*
+!.env.example
