@@ -14,14 +14,14 @@ os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 app = Flask(__name__)
-app.secret_key = "RGPD_Production_2026_Secure_Key"
+app.secret_key = os.environ["SECRET_KEY"]
 
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD_HASH = bcrypt.generate_password_hash("Admin@2026!").decode("utf-8")
+ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
+ADMIN_PASSWORD_HASH = os.environ["ADMIN_PASSWORD_HASH"]
 
 CATEGORIES = [
     "Registre des traitements",
@@ -33,10 +33,9 @@ CATEGORIES = [
     "Violation de données",
     "Formation et sensibilisation",
     "Politique de confidentialité",
-    "Preuves d'audit"
+    "Preuves d'audit",
 ]
 STATUSES = ["À collecter", "En cours", "Validée", "À mettre à jour", "Expirée", "Critique"]
-
 class User(UserMixin):
     def __init__(self, username):
         self.id = username
