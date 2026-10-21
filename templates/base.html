@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -12,20 +13,31 @@
         <h1>Compliance RGPD</h1>
         <p>Centralisation des évidences de conformité</p>
     </div>
-    <nav>
-        <a href="{{ url_for('dashboard') }}">Tableau de bord</a>
-        <a href="{{ url_for('evidences') }}">Évidences</a>
-        <a href="{{ url_for('new_evidence') }}">Ajouter</a>
-        <a href="{{ url_for('export_csv') }}">Export CSV</a>
+
+    <nav aria-label="Navigation principale">
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('dashboard') }}">Tableau de bord</a>
+            <a href="{{ url_for('evidences') }}">Évidences</a>
+            <a href="{{ url_for('new_evidence') }}">Ajouter</a>
+            <a href="{{ url_for('export_csv') }}">Export CSV</a>
+            <a href="{{ url_for('logout') }}">Déconnexion</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Connexion</a>
+        {% endif %}
     </nav>
 </header>
 
 <main>
     {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash">{{ messages[0] }}</div>
-      {% endif %}
+        {% if messages %}
+            <div class="flash" role="status">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
     {% endwith %}
+
     {% block content %}{% endblock %}
 </main>
 </body>
