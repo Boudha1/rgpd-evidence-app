@@ -1,4 +1,33 @@
+# Python
 __pycache__/
 *.pyc
+*.pyo
+.venv/
+venv/
+
+# Fichiers de compilation
 build/
 dist/
+Dist/
+*.spec
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Bases de données et fichiers locaux
+*.db
+*.sqlite
+*.sqlite3
+Téléchargements/
+uploads/
+export_evidences_rgpd.csv
+
+# Git et fichiers temporaires
+.git/
+.pytest_cache/
+*.log
+*.bak
