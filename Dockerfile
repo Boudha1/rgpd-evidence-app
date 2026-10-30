@@ -1,3 +1,4 @@
+
 FROM python:3.12-slim
 
 WORKDIR /app
@@ -7,6 +8,13 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+
+# Création d'un utilisateur non privilégié
+RUN groupadd -g 1000 appgroup \
+    && useradd -u 1000 -g appgroup -M -s /usr/sbin/nologin appuser
+
+# Exécution de Flask/Gunicorn sans privilèges root
+USER appuser:appgroup
 
 EXPOSE 10000
 
